@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ======== Security Category ======== -->
+        <record id="module_category_servicehub" model="ir.module.category">
+            <field name="name">خدمات آرکا</field>
+            <field name="description">سطوح دسترسی اپلیکیشن مدیریت خدمات شرکت آرکا</field>
+            <field name="sequence">25</field>
+        </record>
+
+        <!-- ======== Service User (کاربر خدمات) ======== -->
+        <record id="group_service_user" model="res.groups">
+            <field name="name">کاربر خدمات</field>
+            <field name="category_id" ref="module_category_servicehub"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="comment">کاربر عادی اپلیکیشن خدمات: ثبت و پیگیری سفارش‌ها</field>
+        </record>
+
+        <!-- ======== Service Technician (تکنسین خدمات) ======== -->
+        <record id="group_service_technician" model="res.groups">
+            <field name="name">تکنسین خدمات</field>
+            <field name="category_id" ref="module_category_servicehub"/>
+            <field name="implied_ids" eval="[(4, ref('group_service_user'))]"/>
+            <field name="comment">تکنسین: اجرای سرویس‌ها و دسترسی کامل به سفارش‌ها</field>
+        </record>
+
+        <!-- ======== Service Manager (مدیر خدمات) ======== -->
+        <record id="group_service_manager" model="res.groups">
+            <field name="name">مدیر خدمات</field>
+            <field name="category_id" ref="module_category_servicehub"/>
+            <field name="implied_ids" eval="[(4, ref('group_service_technician'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+            <field name="comment">مدیر اپلیکیشن: دسترسی کامل به همه‌ی رکوردها و تنظیمات (انواع خدمات و برچسب‌ها)</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ======== Form View ======== -->
+        <record id="view_service_tag_form" model="ir.ui.view">
+            <field name="name">service.tag.form</field>
+            <field name="model">service.tag</field>
+            <field name="arch" type="xml">
+                <form string="برچسب خدمت">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="color" widget="color_picker" string="رنگ"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- ======== List (Tree) View ======== -->
+        <record id="view_service_tag_list" model="ir.ui.view">
+            <field name="name">service.tag.list</field>
+            <field name="model">service.tag</field>
+            <field name="arch" type="xml">
+                <tree string="برچسب‌های خدمت" editable="bottom" sample="1">
+                    <field name="name"/>
+                    <field name="color" widget="color_picker" string="رنگ"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- ======== Kanban View ======== -->
+        <record id="view_service_tag_kanban" model="ir.ui.view">
+            <field name="name">service.tag.kanban</field>
+            <field name="model">service.tag</field>
+            <field name="arch" type="xml">
+                <kanban sample="1">
+                    <field name="name"/>
+                    <field name="color"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="#{!selection_mode ? kanban_color(record.color.raw_value) : ''} oe_kanban_global_click">
+                                <div class="o_kanban_record_headings">
+                                    <strong class="o_kanban_record_title">
+                                        <field name="name"/>
+                                    </strong>
+                                </div>
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban_bottom_left">
+                                        <small class="text-muted">برچسب خدمت</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- ======== Search View ======== -->
+        <record id="view_service_tag_search" model="ir.ui.view">
+            <field name="name">service.tag.search</field>
+            <field name="model">service.tag</field>
+            <field name="arch" type="xml">
+                <search string="جستجوی برچسب">
+                    <field name="name" filter_domain="[('name', 'ilike', self)]"/>
+                    <group expand="0" string="گروه‌بندی">
+                        <filter string="رنگ" name="group_color" domain="[]" context="{'group_by': 'color'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- ======== Action ======== -->
+        <record id="action_service_tag" model="ir.actions.act_window">
+            <field name="name">برچسب‌ها</field>
+            <field name="res_model">service.tag</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="view_id" ref="view_service_tag_list"/>
+            <field name="search_view_id" ref="view_service_tag_search"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    هیچ برچسبی ساخته نشده است
+                </p>
+                <p>
+                    برچسب‌ها برای دسته‌بندی درخواست‌ها استفاده می‌شوند و می‌توانید رنگ هر کدام را جداگانه انتخاب کنید.
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

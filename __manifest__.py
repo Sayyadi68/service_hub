@@ -8,7 +8,12 @@
     'license': 'LGPL-3',
     'depends': ['base'],
     'data': [
+        'security/groups.xml',
         'security/ir.model.access.csv',
+        'views/service_order_views.xml',
+        'views/service_type_views.xml',
+        'views/service_tag_views.xml',
+        'views/service_menus.xml',
     ],
     'application': True,
     'installable': True,

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ======== Root Menu ======== -->
+        <menuitem
+            id="menu_service_root"
+            name="خدمات"
+            sequence="15"
+            groups="group_service_user"/>
+
+        <!-- ======== Orders ======== -->
+        <menuitem
+            id="menu_service_orders"
+            name="سفارش‌ها"
+            parent="menu_service_root"
+            sequence="10"
+            action="action_service_order"/>
+
+        <!-- ======== Configuration ======== -->
+        <menuitem
+            id="menu_service_configuration"
+            name="تنظیمات"
+            parent="menu_service_root"
+            sequence="90"
+            groups="group_service_manager"/>
+
+        <menuitem
+            id="menu_service_type"
+            name="انواع خدمات"
+            parent="menu_service_configuration"
+            sequence="10"
+            action="action_service_type"/>
+
+        <menuitem
+            id="menu_service_tag"
+            name="برچسب‌ها"
+            parent="menu_service_configuration"
+            sequence="20"
+            action="action_service_tag"/>
+
+    </data>
+</odoo>

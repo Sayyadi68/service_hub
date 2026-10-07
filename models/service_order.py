@@ -14,3 +14,10 @@ class ServiceOrder(models.Model):
     amount = fields.Float(string='مبلغ', related='request_id.total_price', store=True)
     date_order = fields.Datetime(string='تاریخ سفارش', default=fields.Datetime.now)
     notes = fields.Text(string='یادداشت')
+    priority = fields.Selection([
+        ('0', 'عادی'),
+        ('1', 'متوسط'),
+        ('2', 'مهم'),
+        ('3', 'فوری'),
+    ], string='اولویت', default='0')
+    color = fields.Integer(string='رنگ', default=0)
